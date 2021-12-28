@@ -1,0 +1,16 @@
+@import "reset";
+@import "fonts";
+@import "mixins";
+@import "variable";
+
+body {
+  font-family: $roboto-font;
+}
+a {
+  @include resetAchor();
+}
+.container {
+  max-width: 1230px;
+  padding: 0 15px;
+  margin: 0 auto;
+}

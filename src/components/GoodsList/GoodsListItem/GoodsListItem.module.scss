@@ -1,0 +1,76 @@
+@import "../../../styles/variable.scss";
+
+.goodsItem {
+  max-width: 550px;
+  font-family: $roboto-font;
+  @media (max-width: 1030px) {
+    margin-top: 80px;
+  }
+  &Info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    @media (max-width: 640px) {
+      flex-direction: column;
+      justify-content: center;
+
+      &Text {
+        margin-top: 20px;
+        max-width: 100%;
+      }
+    }
+    &Img {
+      max-width: 260px;
+      max-height: 215px;
+    }
+    &Text {
+      max-width: 290px;
+      &Block {
+        margin-bottom: 30px;
+        &Title {
+          padding-bottom: 10px;
+          font-family: $roboto-slab-font;
+          font-size: 18px;
+          line-height: 24px;
+          color: $header-top-font-color;
+        }
+        &Desc {
+          font-weight: normal;
+          font-size: 16px;
+          line-height: 19px;
+        }
+      }
+    }
+  }
+  &MainInfo {
+    margin-top: 30px;
+    &Title {
+      font-weight: normal;
+      font-size: 24px;
+      font-family: $roboto-slab-font;
+      padding-bottom: 20px;
+      color: $header-top-font-color;
+    }
+    &Text {
+      font-size: 16px;
+      padding-bottom: 25px;
+    }
+    &OrderButton {
+      border: 1px solid #001e64;
+      max-width: 300px;
+      width: 100%;
+      min-height: 50px;
+      cursor: pointer;
+      color: $header-top-font-color;
+      background: none;
+      font-weight: bold;
+      font-size: 24px;
+      font-family: $roboto-slab-font;
+      text-transform: uppercase;
+      border-radius: 20px;
+      @media (max-width: 500px) {
+        max-width: 100%;
+      }
+    }
+  }
+}

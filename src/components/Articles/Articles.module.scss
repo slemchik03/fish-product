@@ -1,0 +1,45 @@
+@import "../../styles/variable.scss";
+
+.article {
+  padding-top: 100px;
+  &List {
+    display: flex;
+    flex-direction: column;
+
+    &Item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 50px;
+      @media (max-width: 1200px) {
+        justify-content: center;
+        flex-direction: column;
+      }
+      &Describe {
+        max-width: 420px;
+        &Title {
+          font-family: $roboto-slab-font;
+          color: $header-top-font-color;
+          font-size: 24px;
+          padding-bottom: 30px;
+        }
+        &Text {
+          font-family: $roboto-font;
+          font-size: 16px;
+          padding-bottom: 20px;
+        }
+        @media (max-width: 1200px) {
+          max-width: 100%;
+          text-align: center;
+        }
+      }
+      &Img {
+        display: inline-block;
+        max-width: 600px;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+    }
+  }
+}

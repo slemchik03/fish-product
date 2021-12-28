@@ -1,0 +1,30 @@
+@import "../../../styles/variable.scss";
+
+.headerBottom {
+  background-image: url("../../../assets/header-bottom-fon.png");
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  padding-top: 230px;
+  &Title {
+    max-width: 580px;
+    text-align: left;
+    font-weight: bold;
+    font-size: 72px;
+    line-height: 95px;
+    font-family: $roboto-font;
+    color: $header-top-font-color;
+    @media (max-width: 950px) {
+      & {
+        font-size: 52px;
+        line-height: 70px;
+      }
+    }
+    @media (max-width: 490px) {
+      & {
+        font-size: 34px;
+        line-height: 50px;
+      }
+    }
+  }
+}

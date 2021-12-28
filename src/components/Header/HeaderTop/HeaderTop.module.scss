@@ -1,0 +1,121 @@
+@import "../../../styles/mixins";
+@import "../../../styles/variable";
+
+.headerTop {
+  &Wrapper {
+    @media (max-width: 1100px) {
+      & {
+        display: none;
+      }
+    }
+    padding-top: 27px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    &Logo {
+      position: relative;
+      min-width: 120px;
+      & img {
+        position: absolute;
+        top: -20px;
+        left: 0;
+        @include logoStyles();
+      }
+    }
+    &Icon {
+      max-width: 30px;
+      max-height: 30px;
+    }
+    &Nav {
+      @include navStyles();
+    }
+  }
+  &Mobile {
+    margin-top: 30px;
+    @media (max-width: 1100px) {
+      & {
+        display: flex;
+      }
+    }
+    display: none;
+    justify-content: space-between;
+    & .headerTopWrapperLogo {
+      top: 20px;
+    }
+    &.active {
+      .headerTopMobileNav {
+        position: fixed;
+        top: 10px;
+        right: 20px;
+      }
+      .headerTopMobileNav div {
+        position: relative;
+        background-color: #fff;
+        transition: all 0.3s ease;
+        &:first-child {
+          top: 20px;
+          transform: rotate(40deg);
+        }
+        &:nth-child(2) {
+          opacity: 0;
+        }
+        &:last-child {
+          transform: rotate(-40deg);
+        }
+      }
+      .headerTopMobileContent {
+        transform: translateX(0);
+      }
+    }
+    &Nav {
+      cursor: pointer;
+      min-width: 30px;
+      z-index: 10;
+      & div {
+        background-color: #000;
+        width: 100%;
+        min-height: 5px;
+        margin-top: 5px;
+        border-radius: 2px;
+      }
+    }
+
+    &Content {
+      display: flex;
+      transform: translateX(-100%);
+      background-color: $header-top-font-color;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      position: fixed;
+      min-height: 100%;
+      min-width: 100%;
+      z-index: 2;
+      top: 0;
+      left: 0;
+      transition: transform 0.5s ease;
+      & li {
+        list-style-type: none;
+        text-align: center;
+        min-width: 100%;
+        & a {
+          display: inline-block;
+          color: #fff;
+          font-size: 24px;
+          text-transform: uppercase;
+          padding: 20px;
+          margin: 20px 10px;
+          width: 50%;
+          border-radius: 10px;
+          transition: 0.15s;
+          &:hover {
+            background-color: #fff;
+            color: #000;
+            transition: 0.15s;
+          }
+        }
+      }
+    }
+  }
+}
