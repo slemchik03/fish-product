@@ -12,8 +12,16 @@
       align-items: center;
       margin-bottom: 50px;
       @media (max-width: 1200px) {
-        justify-content: center;
-        flex-direction: column;
+        & {
+          justify-content: center;
+          flex-direction: column;
+        }
+      }
+      &.reverse {
+        flex-direction: row-reverse;
+        @media (max-width: 1200px) {
+          flex-direction: column;
+        }
       }
       &Describe {
         max-width: 420px;

@@ -12,7 +12,7 @@ export const actionCreators = {
     },
     setItemList: () => async (dispatch: AppDispatch) => {
         try {
-            const response = (await axios.get<{data: Item[]}>("goodsList.json")).data.data
+            const response = (await axios.get<{data: Item[]}>("data/goodsList.json")).data.data
             dispatch({type: ActionsType.SET_ITEM_LIST, payload: response} as SetItemList)
             
         } catch (error) {
