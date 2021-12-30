@@ -6,29 +6,46 @@ import { useEffect, useState } from "react"
 import { ArticleItem } from "../../store/reducers/articlesReducer/types"
 import { actionCreators } from "../../store/reducers/articlesReducer/actionCreators"
 import { useDispatch } from "react-redux"
-
-
-
-
+import React from "react"
 
 interface Props {
     articleItems: ArticleItem[];
 }
 
+
+interface ItemStatus {
+    status: boolean;
+    element: React.RefObject<HTMLDivElement> | null;
+}
+
 export const Articles: React.FC<Props> = ({ articleItems }) => {
-    const [scrollTop, setScrollTopValue] = useState(0)
+    const [itemsStatus, setItemsStatus] = useState<ItemStatus[]>([])
     const dispatch = useDispatch()
 
-    const scrollHandler = () => {
-        const scrollY = window.scrollY
-        setScrollTopValue(scrollY)
-    }
+    window.onscroll = e => {
+        const scrolledY = window.scrollY
 
-    window.onscroll = scrollHandler
+        const updatedItems = itemsStatus.map((value, index) => {
+            const current = value.element?.current
+            if (!value.status && current && current.offsetTop < scrolledY + 240) {
+                console.log(true);
+                return { element: value.element, status: true }
+
+            }
+            return value
+        })
+
+
+        setItemsStatus(updatedItems)
+    }
 
     useEffect(() => {
         dispatch(actionCreators.setItemList())
-    }, [])
+    }, [dispatch])
+
+    useEffect(() => {
+        setItemsStatus(articleItems.map((v, i) => ({ status: false, element: React.createRef() })))
+    }, [articleItems])
 
     let i = 0
     return (
@@ -36,23 +53,36 @@ export const Articles: React.FC<Props> = ({ articleItems }) => {
             <div className="container">
                 <div className={classes.articleList}>
                     {
-                        articleItems.map(item => {
+                        articleItems.map((item, index) => {
                             ++i
+
+                            const currentItemStatus = itemsStatus[index]
+                            const positionClassName = i % 2 === 0 ?
+                                classes.articleListItem + " " + classes.reverse :
+                                classes.articleListItem
+
+                            const currentClassName = currentItemStatus?.status ?
+                                positionClassName + " " + classes.visible :
+                                positionClassName
+
                             return (
-                                <div key={item.id} className={i % 2 === 0 ?
-                                    classes.articleListItem + " " + classes.reverse :
-                                    classes.articleListItem
-                                }>
+                                <div ref={currentItemStatus?.element} key={item.id}
+                                    className={
+                                        currentClassName
+                                    }
+
+                                >
                                     <div className={classes.articleListItemDescribe}>
                                         {
                                             item.info.map(infoItem => {
+
                                                 const titleElement = (
                                                     <p className={classes.articleListItemDescribeTitle}>
                                                         {infoItem.title}
                                                     </p>
                                                 )
                                                 const textElement = infoItem.text.map((textItem, index) => (
-                                                    <p key={index} className={classes.articleListItemDescribeText}>
+                                                    <p className={classes.articleListItemDescribeText}>
                                                         {textItem}
                                                     </p>
                                                 ))

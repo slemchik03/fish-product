@@ -11,6 +11,8 @@
       justify-content: space-between;
       align-items: center;
       margin-bottom: 50px;
+      transition: opacity 0.4s ease-in;
+      opacity: 0;
       @media (max-width: 1200px) {
         & {
           justify-content: center;
@@ -22,6 +24,10 @@
         @media (max-width: 1200px) {
           flex-direction: column;
         }
+      }
+      &.visible {
+        opacity: 1;
+        transition: 0.4s ease-in;
       }
       &Describe {
         max-width: 420px;
