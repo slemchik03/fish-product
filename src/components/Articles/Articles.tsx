@@ -25,18 +25,16 @@ export const Articles: React.FC<Props> = ({ articleItems }) => {
     window.onscroll = e => {
         const scrolledY = window.scrollY
 
-        const updatedItems = itemsStatus.map((value, index) => {
+        const updatedItems = itemsStatus.map((value) => {
             const current = value.element?.current
-            if (!value.status && current && current.offsetTop < scrolledY + 240) {
-                console.log(true);
+            if (!value.status && current && current.offsetTop < scrolledY + 290) {
                 return { element: value.element, status: true }
-
             }
             return value
         })
-
-
-        setItemsStatus(updatedItems)
+        // There we check changed or not updatedItems
+        const conditionArray = updatedItems.filter((value, index) => value.status !== itemsStatus[index].status)
+        if (conditionArray.length) setItemsStatus(updatedItems)
     }
 
     useEffect(() => {
@@ -46,7 +44,7 @@ export const Articles: React.FC<Props> = ({ articleItems }) => {
     useEffect(() => {
         setItemsStatus(articleItems.map((v, i) => ({ status: false, element: React.createRef() })))
     }, [articleItems])
-
+    // Value in this variable influence in the className "articleListItem"
     let i = 0
     return (
         <article className={classes.article}>
